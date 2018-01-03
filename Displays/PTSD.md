@@ -109,7 +109,7 @@ tile RAM ranges from 256 to 4096 words.
 | 4x4        | 4            | 4         | 1024          |
 | 4x8        | 1            | 2         | 512           |
 | 4x8        | 2            | 4         | 1024          |
-| 4x8        | 4            | 4         | 2048          |
+| 4x8        | 4            | 8         | 2048          |
 | 8x8        | 1            | 4         | 1024          |
 | 8x8        | 2            | 8         | 2048          |
 | 8x8        | 4            | 16        | 4096          |
@@ -214,6 +214,12 @@ Background colour 0
 ```
 
 
+#### Sprite Ordering
+
+Sprites are drawn from highest index to lowest index. In other words, the
+lowest-numbered sprites have priority. If two sprites overlap in the same layer,
+the lower-numbered one appears on top.
+
 
 ### Rendering Cycles
 
@@ -246,7 +252,7 @@ The interrupt command is given in `A`, as follows:
     `B` should contain the master configuration word, as follows:
 
     ```
-    ---- ---- ---- ccss
+    ---- ---- --cc --ss
     cc   Colour depth: 0=illegal, 1=1-bit, 2=2-bit, 3=4-bit
     ss   Tile size: 0=4x4, 1=4x8, 3=8x8. 2=(illegal)
     ```
